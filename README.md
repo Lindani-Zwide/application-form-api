@@ -23,10 +23,9 @@ CLOUDINARY_API_SECRET="your_cloudinary_api_secret"
 
 ### 3. Database Setup
 
-Run the following commands to set up the database:
+Run the following command to push the schema to your database:
 
 ```bash
-npx prisma generate
 npx prisma db push
 ```
 
@@ -37,6 +36,8 @@ This will create the `Applicant` table in your Neon database.
 ```bash
 npm install
 ```
+
+> **Note:** `prisma generate` runs automatically as part of `npm install` via the `postinstall` script.
 
 ### 5. Run Locally
 
@@ -55,9 +56,10 @@ Visit `http://localhost:3000` for the form, and `http://localhost:3000/applicati
 
 ```bash
 npm install
-npx prisma generate
 npx prisma db push
 ```
+
+> **Note:** `prisma generate` now runs automatically via the `postinstall` npm script — you no longer need to add it to the Render build command.
 
 5. Set the Render start command to:
 
@@ -68,6 +70,48 @@ npm start
 6. Deploy.
 
 The app will be live, and you can access the form and view applications.
+
+## Verifying the Deployment
+
+Once Render shows **"Deploy successful"**, confirm everything is working end-to-end:
+
+### 1. Health check (server + database)
+
+```bash
+curl https://<your-render-service>.onrender.com/health
+```
+
+Expected response:
+```json
+{ "status": "ok", "database": "connected" }
+```
+
+If you see `"database": "unreachable"` check your `DATABASE_URL` environment variable in Render.
+
+### 2. Fetch applications (GET /applications)
+
+```bash
+curl https://<your-render-service>.onrender.com/applications
+```
+
+Expected: an empty array `[]` (or a list of existing submissions).
+
+### 3. Submit a test application (POST /submit)
+
+```bash
+curl -X POST https://<your-render-service>.onrender.com/submit \
+  -F "firstName=Test" \
+  -F "lastName=User" \
+  -F "description=Deployment verification" \
+  -F "image1=@/path/to/image1.jpg" \
+  -F "image2=@/path/to/image2.jpg"
+```
+
+Expected: HTTP 201 with a JSON object containing the saved applicant record.
+
+### 4. Open the frontend
+
+Navigate to `https://<your-render-service>.onrender.com` in your browser to use the form, and to `/applications.html` to view all submissions.
 
 ## How It Works
 
