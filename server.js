@@ -1,12 +1,14 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
+const { PrismaPg } = require('@prisma/adapter-pg');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const path = require('path');
 require('dotenv').config();
 
 const app = express();
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 // Configure Cloudinary
 cloudinary.config({
