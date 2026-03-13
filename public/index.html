@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <div class="mb-4 text-center">
+      <a href="applications.html" class="text-blue-500 hover:underline">View All Applications</a>
+    </div>
+    <h1 class="text-2xl font-bold mb-6 text-center">Application Form</h1>
+    <form id="applicationForm" enctype="multipart/form-data">
+      <div class="mb-4">
+        <label for="firstName" class="block text-gray-700">First Name</label>
+        <input type="text" id="firstName" name="firstName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div class="mb-4">
+        <label for="lastName" class="block text-gray-700">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div class="mb-4">
+        <label for="description" class="block text-gray-700">Short Description</label>
+        <textarea id="description" name="description" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="image1" class="block text-gray-700">Image 1</label>
+        <input type="file" id="image1" name="image1" accept="image/*" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <div class="mb-4">
+        <label for="image2" class="block text-gray-700">Image 2</label>
+        <input type="file" id="image2" name="image2" accept="image/*" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit Application</button>
+    </form>
+    <div id="message" class="mt-4 text-center"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
